@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<nav>
+	<ul>
+		<li><a href="/index">Home</a></li>
+		<li><a href="/show_table">List</a>
+	</ul>
+</nav>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <h2>{{ message }}</h2>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+{% block content %}{% endblock %}

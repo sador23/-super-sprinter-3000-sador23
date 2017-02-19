@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% extends "super.html" %}
+{% block content %}
+<html lang="en">
+<head>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Add a new Story</title>
+</head>
+<body>
+
+<h1>User Story manager - add story</h1>
+{% if session.add %}
+<form class="input_fields" action="{{url_for('add_story')}}" method="post">
+    {% else %}
+<form class="input_fields" action="{{url_for('.edit_table')}}" method="post">
+{% endif %}
+    <div class="box1">
+        <dt>Story title:</dt>
+        {% if session.add %}
+        <dd><input type="text" name=title></dd>
+        {% else %}
+        <dd><input type="text" name="title" value="{{ stories.title }}"></dd>
+        {% endif %}
+        <dt></dt>
+    </div>
+    <div class="box2">
+        <dt>User Story:</dt>
+        {% if session.add %}
+        <dd><input type="text" name=story class="entry" align="start"></dd>
+        {% else %}
+        <dd><input type="text" class=entry name=story value= "{{ stories.story_text }}" ></dd>
+        {% endif %}
+    </div>
+    <div class="box3">
+        <dt>Acceptance criteria:</dt>
+        {% if session.add %}
+        <dd><input type="text" name=criteria class=entry></dd>
+        {% else %}
+        <dd><input type="text" name=criteria class=entry value="{{ stories.criteria }}"></dd>
+        {% endif %}
+    </div>
+    <div class="box4">
+        <dt>Business value:</dt>
+        {% if session.add %}
+        <dd><input type="number" min="100" max="1500" step="100" value="100" name="bvalue"></dd>
+        {% else %}
+        <dd><input type="number" min="100" max="1500" step="100" name="bvalue" value={{ stories.value }} ></dd>
+        {% endif %}
+    </div>
+    <div class="box5">
+        <dt>Estimation (h)</dt>
+        {% if session.add %}
+        <dd><input type="number" min="0.5" max="40" step="0.5" value="0.5" name="estimation"></dd>
+        {% else %}
+        <dd><input type="number" min="0.5" max="40" step="0.5" name="estimation" value={{ stories.estimation }}></dd>
+            {% endif %}
+    </div>
+    <div class="box6">
+        <dt>Status:</dt>
+        <select name="status">
+            <option value="Planning" {% if stories.status  == "Planning" %} selected {% endif %} >Planning</option>
+            <option value="Todo" {% if stories.status  == "Todo" %} selected {% endif %}>Todo</option>
+            <option value="In progress" {% if  stories.status  == "In progress" %} selected {% endif %}>In progress</option>
+            <option value="Review" {% if stories.status  == "Review" %} selected {% endif %}>Review</option>
+            <option value="Done" {% if  stories.status == "Done" %} selected {% endif %}>Done</option>
+        </select>
+    </div>
+    </dl>
+    <p>
+        {% if session.add %}
+        <input type="submit" name="create" , value="Create" class="create"></p>
+    {% else %}
+    <input type="hidden" name ="hid_id" value={{ stories.id }}>
+    <input type="submit" name="edit" , value="Update" class="create"></p>
+    {% endif %}
+
+</form>
+</body>
+{% endblock %}
+</html>
