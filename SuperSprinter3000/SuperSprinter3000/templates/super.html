@@ -1,9 +1,24 @@
 <!DOCTYPE html>
-<nav>
-	<ul>
-		<li><a href="/index">Home</a></li>
-		<li><a href="/show_table">List</a>
-	</ul>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="{{url_for ('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <title>{{ title }}</title>
+</head>
+</head>
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar_what">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">SuperSprinter3000</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/index">Add Story</a></li>
+            <li><a href="/show_table">List stories</a></li>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Log out</a></li>
+        </ul>
+    </div>
 </nav>
 {% with messages = get_flashed_messages() %}
   {% if messages %}

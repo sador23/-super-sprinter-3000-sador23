@@ -48,6 +48,8 @@ def initdb_command():
     init_db()
     print('Initialized the database.')
 
+
+@app.route("/")
 @app.route("/index")
 def index():
     session["add"] = True
